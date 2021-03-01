@@ -6,7 +6,7 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "w4tchd0g"
+(setq user-full-name "silverh4nd"
       user-mail-address "jonvic@163.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
@@ -22,10 +22,10 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
-(setq doom-font (font-spec :family "JetBrains Mono" :size 11 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Fira Code") ; inherits `doom-font''s :size
-      doom-unicode-font (font-spec :family "Source Code Pro" :size 11)
-      doom-big-font (font-spec :family "Merriweather" :size 18))
+(setq doom-font (font-spec :family "Fira Code" :size 13 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "Iosevka") ; inherits `doom-font''s :size
+      doom-unicode-font (font-spec :family "Source Code Pro" :size 13)
+      doom-big-font (font-spec :family "Merriweather" :size 22))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -34,14 +34,17 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/org/"
+      ;;org-ellipsis " ▾ "
+      org-bullets-bullet-list '("∴")
+      org-tags-column -96)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
 
-;; Here are some additional functions/macros that could help you configure Doom:
+;; Here are some additional functions/macros that could help you configure Doom:yyy
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package!' for configuring packages
@@ -60,5 +63,14 @@
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
-;; opening ".vue" files with web-mode
 (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+
+;; google-c-style
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+;; default-tab-width
+(setq default-tab-width 8)
+(setq indent-tabs-mode t)
+(setq auto-save-default nil)

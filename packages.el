@@ -50,3 +50,5 @@
 ;(unpin! t)
 
 (package! web-mode)
+(package! google-c-style)
+(package! org-bullets)
