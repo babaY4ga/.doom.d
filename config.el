@@ -30,7 +30,21 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-nord)
+;; (setq doom-theme 'doom-nord)
+
+;; change the theme based on time
+(setq day-theme 'doom-nord-light)
+(setq night-theme 'doom-nord)
+(defun synchronize-theme ()
+  (setq hour
+        (string-to-number
+         (substring (current-time-string) 11 13)))
+  (if (member hour (number-sequence 6 18))
+      (setq now day-theme)
+    (setq now night-theme))
+  (load-theme now)
+  )
+(run-with-timer 0 3600 'synchronize-theme)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -61,7 +75,9 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+;; (add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(setq default-frame-alist
+      '((height . 80) (width . 90)))
 
 (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
 
